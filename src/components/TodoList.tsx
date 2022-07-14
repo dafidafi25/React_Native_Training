@@ -1,26 +1,26 @@
 import React from 'react';
 import {View, StyleSheet, ScrollView, Text, Pressable} from 'react-native';
+import {ITodo} from '../interfaces/Todo';
 
-interface ITodoList {}
+interface ITodoList {
+  deleteEvent: (id: number) => void;
+  Todos: ITodo[];
+}
 
-const TodoList: React.FC<ITodoList> = () => {
+const TodoList: React.FC<ITodoList> = ({Todos, deleteEvent}) => {
   return (
     <View style={styles.container}>
       <ScrollView>
-        <View style={styles.containerList}>
-          <Text style={styles.inputText} />
-          <Pressable
-            style={styles.btnAdd}
-            onPress={() => console.log('Button Tertekan123')}
-          />
-        </View>
-        <View style={styles.containerList}>
-          <Text style={styles.inputText} />
-          <Pressable
-            style={styles.btnAdd}
-            onPress={() => console.log('Button Tertekan123123')}
-          />
-        </View>
+        {Todos.map((item, index) => (
+          <View key={`${index}-${item.id}`} style={styles.containerList}>
+            <Text style={styles.textStyle}>{item.name}</Text>
+            <Pressable
+              style={styles.btnDelete}
+              onPress={() => deleteEvent(item.id)}>
+              <Text style={styles.btnText}>Hapus</Text>
+            </Pressable>
+          </View>
+        ))}
       </ScrollView>
     </View>
   );
@@ -37,13 +37,21 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     maxHeight: 100,
   },
-  inputText: {
+  textStyle: {
     flex: 4,
-    backgroundColor: '#F24822',
+    color: '#fff',
+    fontSize: 30,
   },
-  btnAdd: {
+  btnDelete: {
     flex: 1,
     backgroundColor: '#FFA629',
+    borderRadius: 15,
+  },
+  btnText: {
+    flex: 4,
+    color: '#fff',
+    fontSize: 30,
+    alignSelf: 'center',
   },
 });
 

@@ -1,16 +1,26 @@
-import React from 'react';
-import {View, StyleSheet, TextInput, Pressable} from 'react-native';
+import React, {useState} from 'react';
+import {View, StyleSheet, TextInput, Pressable, Text} from 'react-native';
 
-interface ITodoInput {}
+interface ITodoInput {
+  addEvent: (id: number, nama: string) => void;
+}
 
-const TodoInput: React.FC<ITodoInput> = () => {
+const TodoInput: React.FC<ITodoInput> = ({addEvent}) => {
+  const [todoInput, setTodoInput] = useState<string>('');
+  const idRand = Math.random();
+
   return (
     <View style={styles.container}>
-      <TextInput style={styles.inputText} />
+      <TextInput
+        style={styles.inputText}
+        value={todoInput}
+        onChangeText={newText => setTodoInput(newText)}
+      />
       <Pressable
         style={styles.btnAdd}
-        onPress={() => console.log('Button Tertekan')}
-      />
+        onPress={() => addEvent(idRand, todoInput)}>
+        <Text style={styles.btnText}>+</Text>
+      </Pressable>
     </View>
   );
 };
@@ -32,7 +42,14 @@ const styles = StyleSheet.create({
   },
   btnAdd: {
     flex: 1,
+    justifyContent: 'center',
     backgroundColor: '#FFA629',
+    borderRadius: 20,
+  },
+  btnText: {
+    alignSelf: 'center',
+    color: '#fff',
+    fontSize: 50,
   },
 });
 
