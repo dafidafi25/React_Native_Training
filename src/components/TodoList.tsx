@@ -1,31 +1,27 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, ScrollView, Text, Pressable} from 'react-native';
 
 interface ITodoList {}
 
 const TodoList: React.FC<ITodoList> = () => {
   return (
     <View style={styles.container}>
-      <View style={styles.containerList}>
-        <View style={styles.inputText} />
-        <View style={styles.btnAdd} />
-      </View>
-      <View style={styles.containerList}>
-        <View style={styles.inputText} />
-        <View style={styles.btnAdd} />
-      </View>
-      <View style={styles.containerList}>
-        <View style={styles.inputText} />
-        <View style={styles.btnAdd} />
-      </View>
-      <View style={styles.containerList}>
-        <View style={styles.inputText} />
-        <View style={styles.btnAdd} />
-      </View>
-      <View style={styles.containerList}>
-        <View style={styles.inputText} />
-        <View style={styles.btnAdd} />
-      </View>
+      <ScrollView>
+        <View style={styles.containerList}>
+          <Text style={styles.inputText} />
+          <Pressable
+            style={styles.btnAdd}
+            onPress={() => console.log('Button Tertekan123')}
+          />
+        </View>
+        <View style={styles.containerList}>
+          <Text style={styles.inputText} />
+          <Pressable
+            style={styles.btnAdd}
+            onPress={() => console.log('Button Tertekan123123')}
+          />
+        </View>
+      </ScrollView>
     </View>
   );
 };
